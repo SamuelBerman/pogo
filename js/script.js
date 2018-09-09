@@ -5,11 +5,9 @@ const KEY_D = 68;
 const KEY_SPACE = 32;
 const KEY_SHIFT = 16;
 
-var playerOnFloor = false;
-
-
 var c = document.getElementById("canvas");
 var ctx = c.getContext("2d");
+
 c.width = window.innerWidth;
 c.height = window.innerHeight;
 //document.body.appendChild(c);
@@ -24,29 +22,38 @@ var keys = [];
 
     // module aliases
 var Engine = Matter.Engine,
-      World = Matter.World,
-      Composites = Matter.Composites,
-      Composite = Matter.Composite,
-      Body = Matter.Body,
-      Bodies = Matter.Bodies,
-      Events = Matter.Events;
+    Render = Matter.Render,
+    Runner = Matter.Runner,
+    Composites = Matter.Composites,
+    Events = Matter.Events,
+    Constraint = Matter.Constraint,
+    MouseConstraint = Matter.MouseConstraint,
+    Mouse = Matter.Mouse,
+    World = Matter.World,
+    Bodies = Matter.Bodies,
+    Body = Matter.Body,
+    Composite = Matter.Composite;
 
 // create an engine
 var engine = Engine.create();
 
+var pogoStick = Bodies.rectangle(window.innerWidth/2, 270, 20, 45, {density:0.002, friction:1});
+var pogoBody = Bodies.rectangle(window.innerWidth/2, 225, 30, 90, {density:0.002, friction:1});
 
-//access stackA elements with:   stackA.bodies[i]   i = 1 through 6x6
-var playerBody = Bodies.rectangle(window.innerWidth/2,225,20,20,{density:0.002, friction:0.5});
-var playerFloorSensor = Bodies.circle(window.innerWidth/2,245,2,{density:0, friction:0.3, isSensor: true});
+pogoBody.col = '#FF0000';
+pogoStick.col = '#FF6600';
 
- var player = Body.create({
-            parts: [playerBody, playerFloorSensor],
-            friction:0
-});
-playerBody.col = '#FFDDDD';
+var options = {
+    bodyA: pogoStick.body,
+    bodyB: pogoBody.body,
+    stiffness: 0.005,
+    damping: 1,
+    length: 1
+}
 
+var spring = Constraint.create(options);
 
-World.add(engine.world, [player]);
+World.add(engine.world, [pogoBody, pogoStick, spring]);
 
 var offset = 1;
 var wallSize = 20;
@@ -76,22 +83,19 @@ Engine.run(engine);
 //render
 (
     function render() {
-    // keep player at 0 rotation
-    Body.setAngle(player, 0);
 
     // react to key commands and apply force as needed
-    if((keys[KEY_SPACE] || keys[KEY_W]) && playerOnFloor){
-        let force = (-0.013 * player.mass) ;
-        Body.applyForce(player,player.position,{x:0,y:force});
+    if(keys[KEY_SPACE]){
+        let force = (-0.3) ;
+        Body.applyForce(pogoBody,pogoBody.position,{x:0,y:force});
     }
 
     if(keys[KEY_D]){
-        let force = (0.0004 * player.mass) ;
-        Body.applyForce(player,player.position,{x:force,y:0});
+        Body.setAngularVelocity(pogoBody, 0.05);
     }
     if(keys[KEY_A]){
-        let force = (-0.0004 * player.mass) ;
-        Body.applyForce(player,player.position,{x:force,y:0});
+        let force = (-0.0004);
+        Body.setAngularVelocity(pogoBody, -0.05);
     }
 
     // get all bodies
@@ -118,8 +122,10 @@ Engine.run(engine);
     ctx.fillStyle='#FAFAFF';
     ctx.fill();
 
-    // fil player separatly
-    fillObject(playerBody);
+    // fil pogoBody separatly
+
+    fillObject(pogoStick);
+    fillObject(pogoBody);
 
 
 })();
