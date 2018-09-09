@@ -6,4 +6,5 @@ html, body, #canvas {
   overflow: hidden;
   display: block;
   position: absolute;
+  background-color: #3399ff
 }
