@@ -18,6 +18,7 @@ window.onresize = function(event) {
 };
 
 var keys = [];
+var used_keys = [];
 
     // module aliases
 var Engine = Matter.Engine,

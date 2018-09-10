@@ -19,9 +19,9 @@ Engine.run(engine);
     function render() {
 
     // react to key commands and apply force as needed
-    if(keys[KEY_SPACE]){
-        let force = (-0.03) ;
-        Body.applyForce(pogoBody,pogoBody.position,{x:0,y:force});
+    if(keys[KEY_SPACE] && !used_keys[KEY_SPACE]){
+        Body.applyForce(pogoBody, pogoBody.position, {x:0,y:-0.5})
+        used_keys[KEY_SPACE] = true;
     }
 
     if(keys[KEY_D]){
@@ -79,6 +79,7 @@ function fillObject(object){
 
 document.body.addEventListener("keyup", function(e) {
   keys[e.keyCode] = false;
+  used_keys[e.keyCode] = false;
 });
 document.body.addEventListener("keydown", function(e) {
   keys[e.keyCode] = true;

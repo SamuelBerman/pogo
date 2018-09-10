@@ -10,7 +10,7 @@ var spring = Constraint.create ({
     pointA: {x:0,y:-80},
     bodyA: pogoStick,
     bodyB: pogoBody,
-    stiffness: 0.1,
+    stiffness: 0.2,
     length: 0
 });
 
@@ -18,6 +18,6 @@ var spring2 = Constraint.create ({
     pointB: {x:0,y:40},
     bodyA: pogoStick,
     bodyB: pogoBody,
-    stiffness: 0.1,
+    stiffness: 0.2,
     length: 0
 });
