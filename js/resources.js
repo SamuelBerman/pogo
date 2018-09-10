@@ -19,6 +19,7 @@ window.onresize = function(event) {
 
 var keys = [];
 var used_keys = [];
+var playerOnFloor = false;
 
     // module aliases
 var Engine = Matter.Engine,

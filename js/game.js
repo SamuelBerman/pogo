@@ -19,7 +19,7 @@ Engine.run(engine);
     function render() {
 
     // react to key commands and apply force as needed
-    if(keys[KEY_SPACE] && !used_keys[KEY_SPACE]){
+    if(keys[KEY_SPACE] && !used_keys[KEY_SPACE] && playerOnFloor){
         Body.applyForce(pogoBody, pogoBody.position, {x:0,y:-0.5})
         used_keys[KEY_SPACE] = true;
     }
