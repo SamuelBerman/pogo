@@ -20,7 +20,12 @@ Engine.run(engine);
 
     // react to key commands and apply force as needed
     if(keys[KEY_SPACE] && !used_keys[KEY_SPACE] && playerOnFloor){
-        Body.applyForce(pogoBody, pogoBody.position, {x:0,y:-0.5})
+        var angle = pogoBody.angle;
+        var force = -0.5
+        Body.applyForce(pogoBody, pogoBody.position, {
+          x:-Math.sin(angle)*force,
+          y:Math.cos(angle)*force
+        })
         used_keys[KEY_SPACE] = true;
     }
 
