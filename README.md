@@ -1,5 +1,5 @@
 # pogo
-A simple JavaScript pogo game inspired by @aaronduino.
+A simple JavaScript pogo game inspired by @aaronduino's PogoBot.
 
 This game uses the Matter.js physics library.
 
