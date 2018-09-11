@@ -30,11 +30,11 @@ Engine.run(engine);
     }
 
     if(keys[KEY_D]){
-        Body.setAngularVelocity(pogoBody, 0.05);
+        Body.setAngularVelocity(pogoBody, (SENSITIVITY/100));
     }
     if(keys[KEY_A]){
-        let force = (-0.0004);
-        Body.setAngularVelocity(pogoBody, -0.05);
+        let force = (-0.0004)
+        Body.setAngularVelocity(pogoBody, -(SENSITIVITY/100));
     }
 
     // get all bodies

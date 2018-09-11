@@ -5,6 +5,9 @@ const KEY_D = 68;
 const KEY_SPACE = 32;
 const KEY_SHIFT = 16;
 
+// sensitivity is from 1 to 10
+const SENSITIVITY = 6;
+
 var c = document.getElementById("canvas");
 var ctx = c.getContext("2d");
 
