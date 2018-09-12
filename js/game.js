@@ -19,7 +19,7 @@ Engine.run(engine);
     function render() {
 
     // react to key commands and apply force as needed
-    if(keys[KEY_SPACE] && !used_keys[KEY_SPACE] && playerOnFloor){
+    if(((keys[KEY_SPACE] && !used_keys[KEY_SPACE]) || (keys[KEY_UP] && !used_keys[KEY_UP])) && playerOnFloor){
         var angle = pogoBody.angle;
         var force = -0.5
         Body.applyForce(pogoBody, pogoBody.position, {
@@ -27,12 +27,13 @@ Engine.run(engine);
           y:Math.cos(angle)*force
         })
         used_keys[KEY_SPACE] = true;
+        used_keys[KEY_UP] = true;
     }
 
-    if(keys[KEY_D]){
+    if(keys[KEY_D] || keys[KEY_RIGHT]){
         Body.setAngularVelocity(pogoBody, (SENSITIVITY/100));
     }
-    if(keys[KEY_A]){
+    if(keys[KEY_A] || keys[KEY_LEFT]){
         let force = (-0.0004)
         Body.setAngularVelocity(pogoBody, -(SENSITIVITY/100));
     }

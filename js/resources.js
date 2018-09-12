@@ -4,6 +4,10 @@ const KEY_S = 83;
 const KEY_D = 68;
 const KEY_SPACE = 32;
 const KEY_SHIFT = 16;
+const KEY_LEFT = 37;
+const KEY_UP = 38;
+const KEY_RIGHT = 39;
+const KEY_DOWN = 40;
 
 // sensitivity is from 1 to 10
 const SENSITIVITY = 6;
