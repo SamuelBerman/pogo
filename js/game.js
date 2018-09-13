@@ -8,7 +8,7 @@ var wallSize = 100;
 ground = Bodies.rectangle(window.innerWidth/2, window.innerHeight + offset, window.innerWidth + 2 * offset, wallSize, {isStatic: true}),
 ground.col = '#008000'
 
-World.add(engine.world, [pogoBody, pogoStick, spring, spring2, ground]);
+World.add(engine.world, [pogoBody, pogoStick, in1, in2, ground]);
 
 // run the engine
 Engine.run(engine);
@@ -19,15 +19,19 @@ Engine.run(engine);
     function render() {
 
     // react to key commands and apply force as needed
-    if(((keys[KEY_SPACE] && !used_keys[KEY_SPACE]) || (keys[KEY_UP] && !used_keys[KEY_UP])) && playerOnFloor){
-        var angle = pogoBody.angle;
-        var force = -0.5
-        Body.applyForce(pogoBody, pogoBody.position, {
-          x:-Math.sin(angle)*force,
-          y:Math.cos(angle)*force
-        })
+    if(((keys[KEY_SPACE] && !used_keys[KEY_SPACE]) || (keys[KEY_UP] && !used_keys[KEY_UP]))){
+        World.remove(engine.world, [in1, in2]);
+        World.add(engine.world, [out1, out2]);
         used_keys[KEY_SPACE] = true;
         used_keys[KEY_UP] = true;
+        if (playerOnFloor) {
+          var angle = pogoBody.angle;
+          var force = -0.5
+          Body.applyForce(pogoBody, pogoBody.position, {
+            x:-Math.sin(angle)*force,
+            y:Math.cos(angle)*force
+          })
+        }
     }
 
     if(keys[KEY_D] || keys[KEY_RIGHT]){
@@ -37,6 +41,7 @@ Engine.run(engine);
         let force = (-0.0004)
         Body.setAngularVelocity(pogoBody, -(SENSITIVITY/100));
     }
+
 
     // get all bodies
     var bodies = Composite.allBodies(engine.world);
@@ -84,6 +89,10 @@ function fillObject(object){
 
 
 document.body.addEventListener("keyup", function(e) {
+  if (e.keyCode == KEY_SPACE) {
+    World.remove(engine.world, [out1, out2]);
+    World.add(engine.world, [in1, in2]);
+  }
   keys[e.keyCode] = false;
   used_keys[e.keyCode] = false;
 });
