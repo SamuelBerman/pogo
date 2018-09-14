@@ -11,7 +11,7 @@ var in1 = Constraint.create ({
     pointB: {x:0,y:20},
     bodyA: pogoStick,
     bodyB: pogoBody,
-    stiffness: 0.1,
+    stiffness: 0.2,
     length: 0
 });
 
@@ -20,7 +20,7 @@ var in2 = Constraint.create ({
     pointB: {x:0,y:60},
     bodyA: pogoStick,
     bodyB: pogoBody,
-    stiffness: 0.1,
+    stiffness: 0.2,
     length: 0
 });
 
@@ -29,7 +29,7 @@ var out1 = Constraint.create ({
     pointB: {x:0,y:50},
     bodyA: pogoStick,
     bodyB: pogoBody,
-    stiffness: 0.1,
+    stiffness: 0.2,
     length: 0
 });
 
@@ -38,6 +38,6 @@ var out2 = Constraint.create ({
     pointB: {x:0,y:90},
     bodyA: pogoStick,
     bodyB: pogoBody,
-    stiffness: 0.1,
+    stiffness: 0.2,
     length: 0
 });
