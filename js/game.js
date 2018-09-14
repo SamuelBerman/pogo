@@ -38,7 +38,6 @@ Engine.run(engine);
         Body.setAngularVelocity(pogoBody, (SENSITIVITY/100));
     }
     if(keys[KEY_A] || keys[KEY_LEFT]){
-        let force = (-0.0004)
         Body.setAngularVelocity(pogoBody, -(SENSITIVITY/100));
     }
 
@@ -89,7 +88,7 @@ function fillObject(object){
 
 
 document.body.addEventListener("keyup", function(e) {
-  if (e.keyCode == KEY_SPACE) {
+  if (e.keyCode == KEY_SPACE || e.keyCode == KEY_UP) {
     World.remove(engine.world, [out1, out2]);
     World.add(engine.world, [in1, in2]);
   }
