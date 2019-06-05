@@ -6,7 +6,7 @@ var engine = Engine.create();
 var offset = 1;
 var wallSize = 100;
 ground = Bodies.rectangle(window.innerWidth/2, window.innerHeight + offset, window.innerWidth + 2 * offset, wallSize, {isStatic: true}),
-ground.col = '#008000'
+ground.col = '#0e4d27'
 
 World.add(engine.world, [pogoBody, pogoStick, in1, in2, ground]);
 
